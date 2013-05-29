@@ -51,6 +51,20 @@
         <?php echo $content; ?>
     </div>
     <div class="footer">
+        <div class="info-footer">
+            <?php echo Html::anchor('main/index', 'Home') ?>
+            <?php echo Html::anchor ('categories/index', 'Reservation')?>
+        </div>
+        <div class="call-us">
+            <h3>Contact us if you have a questions!</h3>
+            <h4>UAB Vadvilsa</h4>
+            <p>Adress: Vytenio gatve 29</p>
+            <p>Phone: 89944993</p>
+            <p>E-mail: vadvilsa@takas.lt</p>
+        </div>
+        <div class="logo-footer">
+            <?php echo Html::anchor('main/index', Asset::img('ananas.png'))?>
+        </div>
         <div class="all-rights">
             <p>All Rights Reserved. UAB Vadvilsa. 2013.</p>
         </div>

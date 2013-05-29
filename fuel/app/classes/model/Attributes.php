@@ -33,7 +33,7 @@ class Model_Attributes extends Orm\Model
                        'type'=>'text'
                    )
                ),
-                'type',
+                'type' => array('form' => array('type' => 'select', 'options' => array('checkbox', 'def'))),
                    'options'
     );
 };

@@ -1,6 +1,6 @@
 <div class="log-form">
-    <form action="/users/login" method="post">
-        <?php echo Form::label('Login: ', 'username');?>
+    <?php echo Form::open('/users/login', array('method' => 'post'));
+        echo Form::label('Login: ', 'username');?>
         <input name="username" type="text">
         <?php echo Form::label('Password: ', 'password');?>
         <input name="password" type="password">

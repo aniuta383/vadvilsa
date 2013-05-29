@@ -1,6 +1,6 @@
 <div class="reg-form">
-    <form action="/users/registration" method="post">
-        <?php echo Form::label('Login: ', 'username');?>
+    <?php echo Form::open('/users/registration', array('method' => 'post'));
+        echo Form::label('Login: ', 'username');?>
         <input name="username" type="text">
         <?php echo Form::label('E-mail: ', 'email');?>
         <input type="text" name="email">

@@ -12,6 +12,8 @@ class Controller_Products extends Controller_Template
         $sets = Model_AttributeSets::find("all");
         foreach ($sets as $roow)
         {
+            if(!Model_AttributesAndSets::find('first', array('where' => array('set_id' => $roow['set_id']))))
+            continue;
             $set[$roow['set_id']] = $roow['group_name'];
         }
         $fieldset = Fieldset::forge()->add_model('Model_Products')->repopulate();
@@ -84,16 +86,18 @@ class Controller_Products extends Controller_Template
             $product->image = $product_id.'.'.$image['extension'];
             $product->price = Input::post('price');
             $product->save();
-            foreach(Input::post('attr') AS $attr => $value){
-                //var_dump($value);die;
-                //var_dump($value); die;
-                if(is_array($value))
-                $value = implode(",", $value);
-                $p = new Model_ProductsValue();
-                $p->product_id = $product_id;
-                $p->attribute_id = $attr;
-                $p->value = $value;
-                $p->save();
+            if(is_array(Input::post('attr'))){
+                foreach(Input::post('attr') AS $attr => $value){
+                    //var_dump($value);die;
+                    //var_dump($value); die;
+                    if(is_array($value))
+                    $value = implode(",", $value);
+                    $p = new Model_ProductsValue();
+                    $p->product_id = $product_id;
+                    $p->attribute_id = $attr;
+                    $p->value = $value;
+                    $p->save();
+                }
             }
             Response::redirect('products/view/'.$product_id);
         }

@@ -2,6 +2,7 @@
 class Controller_Categories extends Controller_Template
 {
     public function action_index($category_id = null){
+
         $this->template->title='UAB VADVILSA';
         $menu=Model_Categories::find('all', array('order_by' => array('parent_id')));
         foreach($menu AS $k)
@@ -18,17 +19,32 @@ class Controller_Categories extends Controller_Template
                 $cats[$m->category_id] = $category;
             }
         }
-        if (isset ($category_id))
+        if (isset ($category_id) && $category)
         {
-            $products = Model_Products::find('all', array('related'=> array('categories'=>array('where'=>array('category_id'=>$category_id)))));
+            $config = array(
+                'pagination_url' => Uri::create('categories/index/'.$category_id),
+                'total_items'    => Model_Products::query()->related('categories', array('where' => array(array('category_id', '=', $category_id))))->count(),
+                'per_page'       => 1,
+                'uri_segment'    => 'page',
+            );
+            $pagination = Pagination::forge('mypagination', $config);
+            $products = Model_Products::find('all', array('related'=> array('categories'=>array('where'=>array('category_id'=>$category_id))), 'limit' => $pagination->per_page, 'offset' => $pagination->offset));
         }
         else {
-            $products = Model_Products::find('all');
+            $config = array(
+                'pagination_url' => Uri::create('categories/index'),
+                'total_items'    => Model_ProductsCategories::query()->count(),
+                'per_page'       => 1,
+                'uri_segment'    => 'page',
+            );
+            $pagination = Pagination::forge('mypagination', $config);
+            $products = Model_Products::find('all', array('limit' => $pagination->per_page, 'offset' => $pagination->offset));
         }
         $view  = View::forge('categories');
+        $view->set('pager', $pagination->render(), false);
         $view->set('products', $products, false);
         $view->set('cats', $cats, false);
-        $view->set('subcats',$subcats,false);
+        $view->set('subcats', $subcats, false);
         $this->template->content = $view;
     }
     public function action_delete($category_id){
@@ -36,6 +52,15 @@ class Controller_Categories extends Controller_Template
             if(isset($category_id))
             {
                 $categories = Model_Categories::find($category_id);
+                if(Model_Categories::find('all', array('where' => array('Parent_ID' => $category_id)))){
+                    Session::set_flash('cat_msg', 'v kategorii estj podkategorii!');
+                    Response::redirect('admin/categories');
+                }
+
+                if(Model_ProductsCategories::find('all', array('where' => array('category_id' => $category_id)))){
+                    Session::set_flash('cat_msg', 'estj produkti v kategorii!');
+                    Response::redirect('admin/categories');
+                }
                 $categories->delete();
             }
             return \Response::redirect('admin/categories');
@@ -93,6 +118,13 @@ class Controller_Categories extends Controller_Template
             $this->template->messages = $fieldset->validation()->error();
         }
         $this->template->set('content', $form->build(), false);
+    }
+    public function action_view(){
+        $this->template->title='UAB VADVILSA';
+        $description=Model_Categories::find('all');
+        $view  = View::forge('description');
+        $view->set('description', $description, false);
+        $this->template->content = $view;
     }
 }
 

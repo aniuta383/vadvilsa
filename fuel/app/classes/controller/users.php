@@ -53,7 +53,7 @@ class Controller_Users extends Controller_Template
         if(Input::post()){
             if(Auth::instance()->login())
             {
-                Response::redirect('/') and die();
+               Response::redirect('');
             }
             else
             {

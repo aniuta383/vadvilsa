@@ -26,5 +26,6 @@ foreach($cats AS $cat){
             </button>
         </div><?php
 }
+    echo $pager;
         ?>
 </div>

@@ -6,6 +6,7 @@ class Controller_Account extends Controller_Template
         Response::redirect('user'.$id[1]);
     }
     public function action_view(){
+        if(Auth::check()){
         $userT = Auth::get_user_id();
         $id = $userT[1];
         if(!Auth::check())
@@ -24,6 +25,11 @@ class Controller_Account extends Controller_Template
         $data['my_profile'] = ($my_id[1] == $id);
         $this->template->content = View::forge('view')->set('data', $data);
         $this->template->title = $user['username'];
+        }
+        else {
+            Response::redirect('');
+        }
+
     }
     public function action_edit(){
         if(!Auth::check())

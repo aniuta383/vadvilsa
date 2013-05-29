@@ -12,4 +12,10 @@ class Model_ProductsValue extends \Orm\Model
                 'type'=>'text'
             ))
     );
+    protected static $_belongs_to = array(
+        'attributes' => array(
+            'key_from' => 'attribute_id',
+            'model_to' => 'Model_Attributes',
+            'key_to' => 'attribute_id',
+        ));
 }

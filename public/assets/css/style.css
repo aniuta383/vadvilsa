@@ -10,7 +10,7 @@ h6 { font-size:14px; color:#040215; font-weight:bold; }
 .header { width:100%; float:left; position:relative; background:url(../img/header.png) repeat; }
 .bottom-header { float:left; position:relative; width:100%; }
 .footer { width:100%; float:left; position:relative; background:url(../img/header-footer.png) repeat; }
-.all-rights { margin:20px 0 20px; float:right; color:#ffffff; }
+.all-rights { margin:10px 0 20px; float:right; color:#ffffff; clear:both; }
 .top-header { width:100%; float:left; position:relative; background:url(../img/header-footer.png) }
 .logo { margin:-22px 0 20px 20px; float:left; position:relative; }
 .anchors { float:left; position:relative; margin:5px 0 10px 200px; }
@@ -70,3 +70,10 @@ button a { text-decoration:none; font-weight:bold; font-family:'Verdana', sans-s
 .log-form label { font-size:16px; font-family:'Verdana', sans-serif; font-weight:bold; text-transform:uppercase; }
 .log-form input { clear:both; }
 .categories { float:left; width:100%; background:url(../img/header-footer.png); }
+img { border:none !important; }
+.logo-footer { float:right; position:relative; margin:15px 20px 0 0; }
+.info-footer { float:left; position:relative; width:300px; }
+.info-footer a { color:#ffffff; text-decoration:none; text-transform:uppercase; font-family:'Verdana', sans-serif; font-size:14px; clear:both; }
+.call-us { float:left; position:relative; width:300px; color:#ffffff; }
+.call-us h3 { color:#ffffff !important; }
+.call-us h4 { color:#ffffff !important; }

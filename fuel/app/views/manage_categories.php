@@ -1,7 +1,8 @@
 <?php
-if(Auth::member(100)){
 echo 'Create New Category';
 echo Html::anchor('categories/create',Asset::img('add-new.png', array('title' => 'Add Category')));
+if($msg)
+    echo $msg;
 ?>
 <div class="category-list">
     <?php foreach ($categories as $cats):
@@ -12,8 +13,6 @@ echo Html::anchor('categories/create',Asset::img('add-new.png', array('title' =>
     </br>
     <?php endforeach; ?>
 </div>
-<?php
-}?>
 <button>
         <span>
             <?php echo Html::anchor ('admin/redirect', 'Go back!');?>

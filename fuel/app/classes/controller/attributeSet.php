@@ -1,11 +1,9 @@
 <?php
 class Controller_AttributeSet extends Controller_Template
 {
-    public function before(){
+    public function action_create($set_id=null){
         if(!Auth::check())
             Response::redirect('/');
-    }
-    public function action_create($set_id=null){
         $this->template->title='Create Set';
         $this->template->sets = Model_AttributeSets::find('all');
         $fieldset = Fieldset::forge()->add_model('Model_AttributeSets')->repopulate();
@@ -29,6 +27,8 @@ class Controller_AttributeSet extends Controller_Template
     }
     public function action_delete($set_id){
         {
+            if(!Auth::check())
+                Response::redirect('/');
             if(isset($set_id))
             {
                 $sets = Model_AttributeSets::find($set_id);
@@ -38,7 +38,10 @@ class Controller_AttributeSet extends Controller_Template
         }
     }
     public function action_edit($set_id){
-
+        if(!Auth::check())
+            Response::redirect('/');
+        if(isset($set_id))
+        {
         $this->template->title='Edit set';
         $this->template->id = Model_AttributeSets::find('all');
         $id= \Model_AttributeSets::find($set_id);
@@ -62,5 +65,9 @@ class Controller_AttributeSet extends Controller_Template
             $this->template->messages = $fieldset->validation()->error();
         }
         $this->template->set('content', $form->build(), false);
+    }else {
+            Response::redirect('');
+        }
     }
+
 }

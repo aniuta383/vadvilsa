@@ -15,9 +15,11 @@ class Controller_Admin extends Controller_Template
         $this->template->content = $view;
     }
     public function action_categories(){
+            $msg = Session::get_flash('cat_msg');
             $categories = Model_Categories::find('all');
             $this->template->title='Manage Categories';
             $view  = View::forge('manage_categories');
+            $view->set('msg', $msg, false);
             $view->set('categories', $categories, false);
             $this->template->content = $view;
     }

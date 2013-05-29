@@ -1,12 +1,9 @@
 <?php
 class Controller_Attribute extends Controller_Template
 {
-    public function before(){
-        if(!Auth::check())
-        Response::redirect('/');
-    }
-
     public function action_create($attribute_id=null){
+        if(!Auth::check())
+            Response::redirect('/');
         $this->template->title='Create Attribute';
         $this->template->attributes = Model_Attributes::find('all');
         $sets = Model_AttributeSets::find("all");
@@ -46,7 +43,8 @@ class Controller_Attribute extends Controller_Template
         $this->template->set('content', $form->build(), false);
     }
     public function action_edit($attribute_id){
-
+        if(!Auth::check())
+            Response::redirect('/');
         $this->template->title='Edit attribute';
         $this->template->id = Model_Attributes::find('all');
         $id= \Model_Attributes::find($attribute_id);
@@ -92,7 +90,8 @@ class Controller_Attribute extends Controller_Template
         $this->template->set('content', $form->build(), false);
     }
     public function action_delete($attribute_id){
-        {
+        {        if(!Auth::check())
+            Response::redirect('/');
             if(isset($attribute_id))
             {
                 $attributes = Model_Attributes::find($attribute_id);
