@@ -23,12 +23,12 @@ class Model_Categories extends Orm\Model
         );
     public static function _init()
     {
-        //$categories = Model_Subcategories::find('all', array('where' => array(array('parent_ID', 'IS', NULL))));
- /*       foreach ($categories as $cat)
+        $categories = Model_Subcategories::find('all', array('where' => array(array('parent_ID', 'IS', NULL))));
+      foreach ($categories as $cat)
         {
             static::$_properties['parent_ID']['form']['options']['NULL'] = 'Root Category';
-            static::$_properties['parent_ID']['form']['options'][$cat->ID] = $cat->name;
-        }*/
+            static::$_properties['parent_ID']['form']['options'][$cat->category_id] = $cat->name;
+        }
     }
 };
 
