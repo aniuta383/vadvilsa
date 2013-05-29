@@ -20,7 +20,7 @@ class Controller_Categories extends Controller_Template
         }
         if (isset ($category_id))
         {
-            $products = Model_Products::find('all', array('related'=> array('categories'=>array('where'=>array('category_id'=>2)))));
+            $products = Model_Products::find('all', array('related'=> array('categories'=>array('where'=>array('category_id'=>$category_id)))));
         }
         else {
             $products = Model_Products::find('all');
@@ -38,7 +38,7 @@ class Controller_Categories extends Controller_Template
                 $categories = Model_Categories::find($category_id);
                 $categories->delete();
             }
-            return \Response::redirect('categories/index');
+            return \Response::redirect('admin/categories');
         }
     }
     public function action_edit($category_id){
@@ -60,7 +60,7 @@ class Controller_Categories extends Controller_Template
             $id->description    = $fields['description'];
             if($id->save())
             {
-                \Response::redirect('categories/index');
+                \Response::redirect('admin/categories');
             }
         }
         else
@@ -85,7 +85,7 @@ class Controller_Categories extends Controller_Template
             $categories->parent_ID = $fields['parent_ID'];
             if($categories->save())
             {
-                \Response::redirect('categories/index/'.$categories->ID);
+                \Response::redirect('admin/categories');
             }
         }
         else

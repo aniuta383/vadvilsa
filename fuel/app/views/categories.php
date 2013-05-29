@@ -1,24 +1,30 @@
+<div class="categories">
 <?php
-
 foreach($cats AS $cat){
-        ?> <ul><li><?php echo $cat['name'];?></li><?php
+        ?> <ul class="cats"><li><?php echo \Html::anchor('categories/index/'.$cat['id'], $cat['name']);?></li><?php
     if (isset($subcats[$cat['id']]))
     {
         foreach($subcats[$cat['id']] AS $p=>$c){
-             ?> <ul class="subcats"><li> <?php echo $c['name'];?> </li></ul> <?php
+             ?> <ul class="subcats"><li> <?php echo \Html::anchor('categories/index/'.$c['id'], $c['name']);?> </li></ul> <?php
         }
     }
     ?></ul><?php
-}
-/* foreach ($menu AS $perem){
-echo '<h3><li сlass = "active">';
-    echo \Html::anchor('categories/index/'.$perem->ID, $perem->name);
-    echo '</li></h3><br/>';
-} */
-?>
+}?></div>
+<div class="clearfix"></div>
 <div class="products">
         <?php foreach($products as $product){
-        echo $product['name'];
+        ?>
+        <div class="product">
+            <div class="image">
+                <?php echo Asset::img(str_replace(".", "_small.", $product['image']));?>
+            </div>
+            <?php echo \Html::anchor('products/view/'.$product['product_id'], $product['name']);?>
+            <button>
+                <span>
+                    <?php echo \Html::anchor('products/view/'.$product['product_id'], 'View more');?>
+                </span>
+            </button>
+        </div><?php
 }
         ?>
 </div>

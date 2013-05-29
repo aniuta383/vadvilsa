@@ -37,8 +37,7 @@ class Model_Products extends Orm\Model
     protected static $_properties =
         array ('product_id' ,
                'name' => array('data_type'=>'varchar', 'label' => 'Product Name', 'validation' => array('required'), 'max_length'=>array(255), 'form' =>array ('type'=>'text')),
-               'price',
-                'image' => array('crop_resize', 200, 200)
+               'product_price' =>array('data_type' => 'decimal[6:2]'),
+                'image' => array('form' => array('type' => false)),
         );
 };
-
